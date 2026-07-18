@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>REALKAO SHOP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+
+body{
+
+height:100vh;
+overflow:hidden;
+
+background:#000;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+color:white;
+
+}
+
+
+/* แสงพื้นหลังเคลื่อนที่ */
+
+.bg{
+
+position:absolute;
+
+width:800px;
+height:800px;
+
+background:
+conic-gradient(
+#00eaff,
+#8b5cff,
+#ff0080,
+#00eaff
+);
+
+filter:blur(200px);
+
+animation:spin 12s linear infinite;
+
+opacity:.35;
+
+}
+
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+/* จุดแสง */
+
+.star{
+
+position:absolute;
+
+width:4px;
+height:4px;
+
+background:white;
+
+border-radius:50%;
+
+opacity:.7;
+
+animation:float linear infinite;
+
+}
+
+
+@keyframes float{
+
+0%{
+
+transform:translateY(100vh);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-100vh);
+
+opacity:0;
+
+}
+
+}
+
+
+
+/* กล่องหลัก */
+
+
+.card{
+
+position:relative;
+
+width:400px;
+
+padding:45px;
+
+background:
+
+rgba(255,255,255,.06);
+
+backdrop-filter:blur(30px);
+
+border-radius:30px;
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:
+
+0 0 50px rgba(0,200,255,.3);
+
+overflow:hidden;
+
+z-index:5;
+
+}
+
+
+/* เส้นแสงรอบกล่อง */
+
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+inset:-2px;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+#00eaff,
+transparent
+);
+
+animation:border 4s linear infinite;
+
+z-index:-1;
+
+}
+
+
+@keyframes border{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+
+.logo{
+
+text-align:center;
+
+font-size:38px;
+
+font-weight:700;
+
+letter-spacing:3px;
+
+background:
+
+linear-gradient(
+90deg,
+#fff,
+#00eaff,
+#8b5cff,
+#fff
+);
+
+background-size:300%;
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+animation:text 5s infinite;
+
+
+}
+
+
+@keyframes text{
+
+50%{
+
+background-position:300%;
+
+}
+
+}
+
+
+
+.sub{
+
+text-align:center;
+
+color:#aaa;
+
+margin:10px 0 30px;
+
+}
+
+
+
+input{
+
+width:100%;
+
+padding:16px;
+
+margin:10px 0;
+
+background:#050505;
+
+border:1px solid #222;
+
+border-radius:15px;
+
+color:white;
+
+outline:none;
+
+transition:.4s;
+
+}
+
+
+
+input:focus{
+
+border-color:#00eaff;
+
+box-shadow:
+
+0 0 25px #00eaff;
+
+transform:scale(1.03);
+
+}
+
+
+
+button{
+
+width:100%;
+
+padding:16px;
+
+margin-top:20px;
+
+border:none;
+
+border-radius:15px;
+
+background:
+
+linear-gradient(
+90deg,
+#00eaff,
+#8b5cff
+);
+
+color:white;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.4s;
+
+}
+
+
+
+button:hover{
+
+transform:translateY(-5px) scale(1.03);
+
+box-shadow:
+
+0 20px 40px #8b5cff;
+
+}
+
+
+
+.switch{
+
+text-align:center;
+
+margin-top:25px;
+
+color:#999;
+
+}
+
+
+
+.switch span{
+
+color:#00eaff;
+
+cursor:pointer;
+
+}
+
+
+
+.page{
+
+display:none;
+
+}
+
+
+.active{
+
+display:block;
+
+}
+
+
+
+#welcome{
+
+text-align:center;
+
+}
+
+
+#welcome h1{
+
+font-size:35px;
+
+color:#00eaff;
+
+text-shadow:
+
+0 0 25px #00eaff;
+
+}
+
+
+#welcome h2{
+
+margin-top:20px;
+
+}
+
+
+
+.logout{
+
+background:
+
+linear-gradient(
+90deg,
+#ff0033,
+#ff6600
+);
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="bg"></div>
+
+
+
+<div class="card">
+
+
+<div id="login" class="page active">
+
+
+<div class="logo">
+REALKAO
+</div>
+
+
+<div class="sub">
+PREMIUM SHOP SYSTEM
+</div>
+
+
+<input id="loginUser" placeholder="👤 Username">
+
+
+<input id="loginPass" type="password" placeholder="🔒 Password">
+
+
+<button onclick="login()">
+
+เข้าสู่ระบบ
+
+</button>
+
+
+<div class="switch">
+
+ยังไม่มีบัญชี?
+
+<span onclick="registerPage()">
+สมัครสมาชิก
+</span>
+
+</div>
+
+
+</div>
+
+
+
+
+<div id="register" class="page">
+
+
+<div class="logo">
+REGISTER
+</div>
+
+
+<div class="sub">
+CREATE YOUR ACCOUNT
+</div>
+
+
+<input id="regUser" placeholder="Username">
+
+
+<input id="regPass" type="password" placeholder="Password">
+
+
+<button onclick="register()">
+
+สมัครสมาชิก
+
+</button>
+
+
+<div class="switch">
+
+มีบัญชีแล้ว?
+
+<span onclick="loginPage()">
+เข้าสู่ระบบ
+</span>
+
+</div>
+
+
+</div>
+
+
+
+
+<div id="welcome" class="page">
+
+
+<h1>
+🎉 ยินดีต้อนรับ
+</h1>
+
+
+<h2>
+เข้าสู่ร้าน
+<br>
+REALKAO SHOP
+</h2>
+
+
+<p id="user"></p>
+
+
+<button class="logout" onclick="logout()">
+ออกจากระบบ
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+function registerPage(){
+
+login.classList.remove("active");
+
+register.classList.add("active");
+
+}
+
+
+
+function loginPage(){
+
+register.classList.remove("active");
+
+login.classList.add("active");
+
+}
+
+
+
+function register(){
+
+localStorage.user=regUser.value;
+
+localStorage.pass=regPass.value;
+
+alert("สมัครสมาชิกสำเร็จ");
+
+loginPage();
+
+}
+
+
+
+function login(){
+
+
+if(
+
+loginUser.value==localStorage.user &&
+
+loginPass.value==localStorage.pass
+
+){
+
+
+login.style.display="none";
+
+register.style.display="none";
+
+welcome.classList.add("active");
+
+
+user.innerHTML=
+"👤 "+localStorage.user;
+
+
+}else{
+
+alert("เข้าสู่ระบบไม่สำเร็จ");
+
+}
+
+}
+
+
+
+function logout(){
+
+location.reload();
+
+}
+
+
+
+// สร้างดาวลอย
+
+for(let i=0;i<80;i++){
+
+let s=document.createElement("div");
+
+s.className="star";
+
+s.style.left=Math.random()*100+"vw";
+
+s.style.animationDuration=
+(5+Math.random()*10)+"s";
+
+
+s.style.animationDelay=
+Math.random()*5+"s";
+
+
+document.body.appendChild(s);
+
+}
+
+
+</script>
+
+
+</body>
+</html>
