@@ -9,7 +9,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
 
-
 <style>
 
 *{
@@ -19,179 +18,83 @@ box-sizing:border-box;
 font-family:'Kanit',sans-serif;
 }
 
-
 body{
-
 height:100vh;
-overflow:hidden;
-
 background:#000;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
+overflow:hidden;
 color:white;
-
 }
 
 
-/* แสงพื้นหลังเคลื่อนที่ */
-
 .bg{
-
 position:absolute;
-
-width:800px;
-height:800px;
-
-background:
-conic-gradient(
+width:700px;
+height:700px;
+background:conic-gradient(
 #00eaff,
 #8b5cff,
 #ff0080,
 #00eaff
 );
-
-filter:blur(200px);
-
-animation:spin 12s linear infinite;
-
+filter:blur(180px);
 opacity:.35;
-
+animation:spin 10s linear infinite;
 }
 
 
 @keyframes spin{
-
 100%{
-
 transform:rotate(360deg);
-
+}
 }
 
-}
-
-
-
-/* จุดแสง */
 
 .star{
-
 position:absolute;
-
-width:4px;
-height:4px;
-
+width:3px;
+height:3px;
 background:white;
-
 border-radius:50%;
-
-opacity:.7;
-
 animation:float linear infinite;
-
 }
 
 
 @keyframes float{
 
-0%{
-
+from{
 transform:translateY(100vh);
-
 opacity:0;
-
 }
 
-20%{
-
-opacity:1;
-
-}
-
-100%{
-
+to{
 transform:translateY(-100vh);
-
-opacity:0;
-
+opacity:1;
 }
 
 }
-
-
-
-/* กล่องหลัก */
 
 
 .card{
 
-position:relative;
-
 width:400px;
+padding:40px;
 
-padding:45px;
+background:rgba(255,255,255,.07);
 
-background:
-
-rgba(255,255,255,.06);
-
-backdrop-filter:blur(30px);
+backdrop-filter:blur(25px);
 
 border-radius:30px;
 
-border:1px solid rgba(255,255,255,.15);
+border:1px solid #333;
 
-box-shadow:
-
-0 0 50px rgba(0,200,255,.3);
-
-overflow:hidden;
+box-shadow:0 0 40px #00eaff;
 
 z-index:5;
 
 }
-
-
-/* เส้นแสงรอบกล่อง */
-
-
-.card::before{
-
-content:"";
-
-position:absolute;
-
-inset:-2px;
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-#00eaff,
-transparent
-);
-
-animation:border 4s linear infinite;
-
-z-index:-1;
-
-}
-
-
-@keyframes border{
-
-100%{
-
-transform:rotate(360deg);
-
-}
-
-}
-
-
 
 
 .logo{
@@ -200,67 +103,42 @@ text-align:center;
 
 font-size:38px;
 
-font-weight:700;
+font-weight:bold;
 
-letter-spacing:3px;
-
-background:
-
-linear-gradient(
+background:linear-gradient(
 90deg,
-#fff,
 #00eaff,
-#8b5cff,
-#fff
+#8b5cff
 );
-
-background-size:300%;
 
 -webkit-background-clip:text;
 
 color:transparent;
 
-animation:text 5s infinite;
-
-
-}
-
-
-@keyframes text{
-
-50%{
-
-background-position:300%;
+margin-bottom:10px;
 
 }
-
-}
-
 
 
 .sub{
 
 text-align:center;
-
 color:#aaa;
-
-margin:10px 0 30px;
+margin-bottom:25px;
 
 }
-
 
 
 input{
 
 width:100%;
+padding:15px;
 
-padding:16px;
+margin:8px 0;
 
-margin:10px 0;
+background:#111;
 
-background:#050505;
-
-border:1px solid #222;
+border:1px solid #333;
 
 border-radius:15px;
 
@@ -268,41 +146,31 @@ color:white;
 
 outline:none;
 
-transition:.4s;
-
 }
-
 
 
 input:focus{
 
 border-color:#00eaff;
 
-box-shadow:
-
-0 0 25px #00eaff;
-
-transform:scale(1.03);
+box-shadow:0 0 15px #00eaff;
 
 }
-
 
 
 button{
 
 width:100%;
 
-padding:16px;
+padding:15px;
 
-margin-top:20px;
+margin-top:15px;
 
 border:none;
 
 border-radius:15px;
 
-background:
-
-linear-gradient(
+background:linear-gradient(
 90deg,
 #00eaff,
 #8b5cff
@@ -316,44 +184,14 @@ font-weight:bold;
 
 cursor:pointer;
 
-transition:.4s;
-
 }
-
 
 
 button:hover{
 
-transform:translateY(-5px) scale(1.03);
-
-box-shadow:
-
-0 20px 40px #8b5cff;
+transform:scale(1.04);
 
 }
-
-
-
-.switch{
-
-text-align:center;
-
-margin-top:25px;
-
-color:#999;
-
-}
-
-
-
-.switch span{
-
-color:#00eaff;
-
-cursor:pointer;
-
-}
-
 
 
 .page{
@@ -370,6 +208,25 @@ display:block;
 }
 
 
+.switch{
+
+text-align:center;
+
+margin-top:20px;
+
+color:#aaa;
+
+}
+
+
+.switch span{
+
+color:#00eaff;
+
+cursor:pointer;
+
+}
+
 
 #welcome{
 
@@ -380,34 +237,16 @@ text-align:center;
 
 #welcome h1{
 
-font-size:35px;
-
 color:#00eaff;
 
-text-shadow:
-
-0 0 25px #00eaff;
+text-shadow:0 0 20px #00eaff;
 
 }
-
-
-#welcome h2{
-
-margin-top:20px;
-
-}
-
 
 
 .logout{
 
-background:
-
-linear-gradient(
-90deg,
-#ff0033,
-#ff6600
-);
+background:#ff1744;
 
 }
 
@@ -423,11 +262,12 @@ linear-gradient(
 <div class="bg"></div>
 
 
-
 <div class="card">
 
 
-<div id="login" class="page active">
+<!-- LOGIN -->
+
+<div id="loginPage" class="page active">
 
 
 <div class="logo">
@@ -436,20 +276,18 @@ REALKAO
 
 
 <div class="sub">
-PREMIUM SHOP SYSTEM
+SHOP SYSTEM
 </div>
 
 
-<input id="loginUser" placeholder="👤 Username">
+<input id="loginUsername" placeholder="👤 Username">
 
 
-<input id="loginPass" type="password" placeholder="🔒 Password">
+<input id="loginPassword" type="password" placeholder="🔒 Password">
 
 
-<button onclick="login()">
-
+<button onclick="loginUser()">
 เข้าสู่ระบบ
-
 </button>
 
 
@@ -457,7 +295,7 @@ PREMIUM SHOP SYSTEM
 
 ยังไม่มีบัญชี?
 
-<span onclick="registerPage()">
+<span onclick="openRegister()">
 สมัครสมาชิก
 </span>
 
@@ -469,7 +307,10 @@ PREMIUM SHOP SYSTEM
 
 
 
-<div id="register" class="page">
+<!-- REGISTER -->
+
+
+<div id="registerPage" class="page">
 
 
 <div class="logo">
@@ -478,20 +319,21 @@ REGISTER
 
 
 <div class="sub">
-CREATE YOUR ACCOUNT
+CREATE ACCOUNT
 </div>
 
 
-<input id="regUser" placeholder="Username">
+<input id="registerUsername" placeholder="👤 Username">
 
 
-<input id="regPass" type="password" placeholder="Password">
+<input id="registerPassword" type="password" placeholder="🔒 Password">
 
 
-<button onclick="register()">
+<input id="confirmPassword" type="password" placeholder="🔐 ยืนยัน Password">
 
+
+<button onclick="createAccount()">
 สมัครสมาชิก
-
 </button>
 
 
@@ -499,7 +341,7 @@ CREATE YOUR ACCOUNT
 
 มีบัญชีแล้ว?
 
-<span onclick="loginPage()">
+<span onclick="openLogin()">
 เข้าสู่ระบบ
 </span>
 
@@ -511,7 +353,11 @@ CREATE YOUR ACCOUNT
 
 
 
-<div id="welcome" class="page">
+
+<!-- WELCOME -->
+
+
+<div id="welcomePage" class="page">
 
 
 <h1>
@@ -526,10 +372,10 @@ REALKAO SHOP
 </h2>
 
 
-<p id="user"></p>
+<p id="usernameShow"></p>
 
 
-<button class="logout" onclick="logout()">
+<button class="logout" onclick="logoutUser()">
 ออกจากระบบ
 </button>
 
@@ -545,66 +391,121 @@ REALKAO SHOP
 <script>
 
 
-function registerPage(){
+function openRegister(){
 
-login.classList.remove("active");
-
-register.classList.add("active");
-
-}
+document.getElementById("loginPage")
+.classList.remove("active");
 
 
-
-function loginPage(){
-
-register.classList.remove("active");
-
-login.classList.add("active");
+document.getElementById("registerPage")
+.classList.add("active");
 
 }
 
 
 
-function register(){
+function openLogin(){
 
-localStorage.user=regUser.value;
+document.getElementById("registerPage")
+.classList.remove("active");
 
-localStorage.pass=regPass.value;
+
+document.getElementById("loginPage")
+.classList.add("active");
+
+}
+
+
+
+
+function createAccount(){
+
+let user =
+document.getElementById("registerUsername").value;
+
+
+let pass =
+document.getElementById("registerPassword").value;
+
+
+let confirm =
+document.getElementById("confirmPassword").value;
+
+
+
+if(user=="" || pass=="" || confirm==""){
+
+alert("กรุณากรอกข้อมูลให้ครบ");
+
+return;
+
+}
+
+
+
+if(pass !== confirm){
+
+alert("รหัสผ่านไม่ตรงกัน");
+
+return;
+
+}
+
+
+
+localStorage.setItem("REALKAO_USER",user);
+
+localStorage.setItem("REALKAO_PASS",pass);
+
 
 alert("สมัครสมาชิกสำเร็จ");
 
-loginPage();
+
+openLogin();
 
 }
 
 
 
-function login(){
+
+function loginUser(){
+
+let user =
+document.getElementById("loginUsername").value;
+
+
+let pass =
+document.getElementById("loginPassword").value;
+
 
 
 if(
 
-loginUser.value==localStorage.user &&
+user === localStorage.getItem("REALKAO_USER")
 
-loginPass.value==localStorage.pass
+&&
+
+pass === localStorage.getItem("REALKAO_PASS")
 
 ){
 
 
-login.style.display="none";
-
-register.style.display="none";
-
-welcome.classList.add("active");
+document.getElementById("loginPage")
+.style.display="none";
 
 
-user.innerHTML=
-"👤 "+localStorage.user;
+document.getElementById("welcomePage")
+.classList.add("active");
+
+
+document.getElementById("usernameShow")
+.innerHTML="👤 "+user;
+
 
 
 }else{
 
-alert("เข้าสู่ระบบไม่สำเร็จ");
+alert("Username หรือ Password ไม่ถูกต้อง");
 
 }
 
@@ -612,7 +513,8 @@ alert("เข้าสู่ระบบไม่สำเร็จ");
 
 
 
-function logout(){
+
+function logoutUser(){
 
 location.reload();
 
@@ -620,25 +522,20 @@ location.reload();
 
 
 
-// สร้างดาวลอย
 
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
 
-let s=document.createElement("div");
+let star=document.createElement("div");
 
-s.className="star";
+star.className="star";
 
-s.style.left=Math.random()*100+"vw";
+star.style.left=Math.random()*100+"vw";
 
-s.style.animationDuration=
+star.style.animationDuration=
 (5+Math.random()*10)+"s";
 
 
-s.style.animationDelay=
-Math.random()*5+"s";
-
-
-document.body.appendChild(s);
+document.body.appendChild(star);
 
 }
 
