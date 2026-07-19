@@ -24,6 +24,41 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* 🔴 โหมดเอฟเฟกต์ขยับได้แบบโหดๆ สำหรับแบนเนอร์บนสุด 🔴 */
+        .glow-red-box {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ef4444; /* ขอบแดง */
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); /* เรืองแสงสีแดง */
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        /* แสงเลเซอร์สีแดงเฟี้ยวๆ วิ่งผ่านรูปภาพ */
+        .glow-red-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.8), transparent);
+            transform: skewX(-25deg);
+            animation: laserSwipe 3s infinite ease-in-out;
+        }
+
+        /* Animation ให้กล่องเรืองแสงวูบวาบแบบดุดัน */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); border-color: #dc2626; }
+            100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8), inset 0 0 10px rgba(239, 68, 68, 0.3); border-color: #f87171; }
+        }
+
+        /* Animation ให้แสงเลเซอร์วิ่งผ่าน */
+        @keyframes laserSwipe {
+            0% { left: -150%; }
+            50% { left: 150%; }
+            100% { left: 150%; }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -40,22 +75,25 @@
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </span>
-                <input type="text" placeholder="ค้นหาสินค้า..." class="w-full border border-gray-200 rounded-full py-1.5 pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-purple-400">
+                <input type="text" placeholder="ค้นหาสินค้า..." class="w-full border border-gray-200 rounded-full py-1.5 pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-400">
             </div>
         </header>
 
-        <!-- 2. Banner หลักด้านบนสุด (เปลี่ยนมาเรียกชื่อไฟล์ static.png ตรงตามที่คุณตั้งไว้) -->
+        <!-- 2. Banner หลักด้านบนสุด (ใส่เอฟเฟกต์ Welcome สีแดงขยับได้แบบโหดๆ ครอบรูป static.png ของคุณ) -->
         <section class="px-4 mt-2">
-            <img src="static.png" 
-                 alt="REALKAO SHOP Banner" 
-                 class="w-full rounded-2xl object-cover shadow-sm">
+            <div class="glow-red-box rounded-2xl bg-black flex justify-center items-center">
+                <img src="static.png" 
+                     alt="REALKAO SHOP Welcome Banner" 
+                     class="w-full h-auto rounded-2xl object-cover block"
+                     onerror="this.src='Static.png';">
+            </div>
         </section>
 
-        <!-- 3. หมวดหมู่ (ประกาศ) -->
+        <!-- 3. หมวดหมู่ (ประกาศ - เปลี่ยนเป็นโทนแดงให้เข้ากัน) -->
         <section class="px-4 mt-4 mb-2 flex gap-2 overflow-x-auto no-scrollbar py-1">
-            <button class="whitespace-nowrap bg-purple-100 text-purple-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
-            <button class="whitespace-nowrap bg-purple-100 text-purple-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
-            <button class="whitespace-nowrap bg-purple-100 text-purple-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+            <button class="whitespace-nowrap bg-red-100 text-red-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+            <button class="whitespace-nowrap bg-red-50 text-red-500 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+            <button class="whitespace-nowrap bg-red-50 text-red-500 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
         </section>
         
         <div class="px-4"><hr class="border-gray-100"></div>
@@ -69,29 +107,29 @@
 
         <!-- 5. รายการสั่งซื้อล่าสุด -->
         <section class="px-4 mt-6 bg-gray-50 pt-4 pb-12 rounded-t-3xl">
-            <h2 class="text-purple-600 font-semibold">รายการสั่งซื้อล่าสุด</h2>
+            <h2 class="text-red-600 font-semibold">รายการสั่งซื้อล่าสุด</h2>
             <p class="text-xs text-gray-500 mb-3">Latest Order List</p>
             
             <div class="flex gap-3 overflow-x-auto no-scrollbar pb-4">
                 <div class="min-w-[200px] bg-white p-2 rounded-xl flex gap-3 shadow-sm border border-gray-100 items-center">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg shrink-0"></div>
+                    <div class="w-12 h-12 bg-red-100 rounded-lg shrink-0 flex items-center justify-center text-red-500"><i class="fa-solid fa-basket-shopping"></i></div>
                     <div>
-                        <p class="text-xs text-purple-600 font-medium">ทดสอบ 2</p>
+                        <p class="text-xs text-red-600 font-medium">ทดสอบ 2</p>
                         <p class="text-[10px] text-gray-400">08/05/2569 13:35</p>
                     </div>
                 </div>
                 <div class="min-w-[200px] bg-white p-2 rounded-xl flex gap-3 shadow-sm border border-gray-100 items-center">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg shrink-0"></div>
+                    <div class="w-12 h-12 bg-red-100 rounded-lg shrink-0 flex items-center justify-center text-red-500"><i class="fa-solid fa-basket-shopping"></i></div>
                     <div>
-                        <p class="text-xs text-purple-600 font-medium">สินค้าทดสอบ 1</p>
+                        <p class="text-xs text-red-600 font-medium">สินค้าทดสอบ 1</p>
                         <p class="text-[10px] text-gray-400">08/05/2569 13:34</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. ปุ่มลอย (Music Button) -->
-        <button class="fixed bottom-24 right-4 bg-purple-600 text-white w-12 h-12 rounded-full flex justify-center items-center shadow-lg shadow-purple-300 transform transition active:scale-95 z-20">
+        <!-- 6. ปุ่มลอย (Music Button - ปรับเป็นสีแดงดุดัน) -->
+        <button class="fixed bottom-24 right-4 bg-red-600 text-white w-12 h-12 rounded-full flex justify-center items-center shadow-lg shadow-red-300 transform transition active:scale-95 z-20">
             <i class="fa-solid fa-music"></i>
         </button>
 
