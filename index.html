@@ -12,11 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: #f7f7fa;
-        }
-        
+        /* ซ่อน Scrollbar */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -25,16 +21,52 @@
             scrollbar-width: none;
         }
 
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #000; /* พื้นหลังตัวบอดี้เป็นสีดำสนิท */
+            color: #e5e5e5;
+            margin: 0;
+            position: relative;
+        }
+
+        /* ⬛️ พื้นหลังสีดำตะแกรงเลเซอร์ขยับได้ (Cyberpunk Grid) ⬛️ */
+        .cyber-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background-color: #080808;
+            /* สร้างลายตารางสีแดงเข้มๆ */
+            background-image: 
+                linear-gradient(rgba(239, 68, 68, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(239, 68, 68, 0.08) 1px, transparent 1px);
+            background-size: 35px 35px;
+            animation: gridMove 4s linear infinite;
+        }
+
+        /* เงาดำมืดๆ ขอบจอให้ตรงกลางดูสว่าง */
+        .cyber-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 10%, #000 100%);
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 35px 35px; } /* ขยับแนวทแยง */
+        }
+
         /* 🔴 โหมดเอฟเฟกต์ขยับได้แบบโหดๆ สำหรับแบนเนอร์บนสุด 🔴 */
         .glow-red-box {
             position: relative;
             overflow: hidden;
-            border: 2px solid #ef4444; /* ขอบแดง */
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); /* เรืองแสงสีแดง */
+            border: 1px solid #ef4444; 
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
             animation: pulseGlow 2s infinite alternate;
         }
 
-        /* แสงเลเซอร์สีแดงเฟี้ยวๆ วิ่งผ่านรูปภาพ */
         .glow-red-box::after {
             content: '';
             position: absolute;
@@ -42,45 +74,56 @@
             left: -150%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.8), transparent);
+            background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.6), transparent);
             transform: skewX(-25deg);
             animation: laserSwipe 3s infinite ease-in-out;
         }
 
-        /* Animation ให้กล่องเรืองแสงวูบวาบแบบดุดัน */
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); border-color: #dc2626; }
-            100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8), inset 0 0 10px rgba(239, 68, 68, 0.3); border-color: #f87171; }
+            0% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); border-color: #991b1b; }
+            100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.7), inset 0 0 10px rgba(239, 68, 68, 0.2); border-color: #ef4444; }
         }
 
-        /* Animation ให้แสงเลเซอร์วิ่งผ่าน */
         @keyframes laserSwipe {
             0% { left: -150%; }
             50% { left: 150%; }
             100% { left: 150%; }
         }
+
+        /* Animation ให้ปุ่มเพลงลอยได้ */
+        @keyframes floatMusic {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .music-btn {
+            animation: floatMusic 3s ease-in-out infinite;
+        }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-    <!-- Container หลัก (จำลองหน้าจอมือถือ) -->
-    <div class="max-w-md mx-auto bg-white min-h-screen relative pb-24 shadow-lg">
+    <!-- 🌟 เรียกใช้พื้นหลังขยับได้ 🌟 -->
+    <div class="cyber-bg"></div>
 
-        <!-- 1. Header (เมนู + ค้นหา) -->
-        <header class="flex justify-between items-center px-4 py-4 bg-white sticky top-0 z-10">
-            <button class="text-gray-500 text-2xl border border-gray-200 rounded-lg px-3 py-1">
+    <!-- Container หลัก (ปรับเป็นสีดำโปร่งแสง ให้เห็นพื้นหลังขยับ) -->
+    <div class="max-w-md mx-auto bg-[#0a0a0a]/80 backdrop-blur-md min-h-screen relative pb-24 shadow-[0_0_30px_rgba(239,68,68,0.1)] border-x border-red-900/30">
+
+        <!-- 1. Header (เมนู + ค้นหา ธีมดาร์ก) -->
+        <header class="flex justify-between items-center px-4 py-4 sticky top-0 z-10 bg-[#0a0a0a]/90 backdrop-blur-lg border-b border-red-900/40">
+            <button class="text-red-500 text-2xl border border-red-900/50 rounded-lg px-3 py-1 bg-red-950/30 hover:bg-red-900/50 transition">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div class="relative w-48">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-red-500/70">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </span>
-                <input type="text" placeholder="ค้นหาสินค้า..." class="w-full border border-gray-200 rounded-full py-1.5 pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-400">
+                <input type="text" placeholder="ค้นหาสินค้า..." class="w-full bg-[#151515] border border-red-900/50 rounded-full py-1.5 pl-9 pr-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition">
             </div>
         </header>
 
-        <!-- 2. Banner หลักด้านบนสุด (ใส่เอฟเฟกต์ Welcome สีแดงขยับได้แบบโหดๆ ครอบรูป static.png ของคุณ) -->
-        <section class="px-4 mt-2">
+        <!-- 2. Banner หลักด้านบนสุด (คงเอฟเฟกต์เฟี้ยวๆ ไว้) -->
+        <section class="px-4 mt-4">
             <div class="glow-red-box rounded-2xl bg-black flex justify-center items-center">
                 <img src="static.png" 
                      alt="REALKAO SHOP Welcome Banner" 
@@ -89,47 +132,47 @@
             </div>
         </section>
 
-        <!-- 3. หมวดหมู่ (ประกาศ - เปลี่ยนเป็นโทนแดงให้เข้ากัน) -->
-        <section class="px-4 mt-4 mb-2 flex gap-2 overflow-x-auto no-scrollbar py-1">
-            <button class="whitespace-nowrap bg-red-100 text-red-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
-            <button class="whitespace-nowrap bg-red-50 text-red-500 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
-            <button class="whitespace-nowrap bg-red-50 text-red-500 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+        <!-- 3. หมวดหมู่ (ประกาศ ธีมดาร์ก-แดง) -->
+        <section class="px-4 mt-5 mb-2 flex gap-2 overflow-x-auto no-scrollbar py-1">
+            <button class="whitespace-nowrap bg-red-950/50 border border-red-900/50 text-red-400 px-4 py-1.5 rounded-xl text-sm font-medium shadow-[0_0_10px_rgba(239,68,68,0.15)]">ประกาศ</button>
+            <button class="whitespace-nowrap bg-red-950/30 border border-red-900/30 text-red-500/80 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+            <button class="whitespace-nowrap bg-red-950/30 border border-red-900/30 text-red-500/80 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
         </section>
         
-        <div class="px-4"><hr class="border-gray-100"></div>
+        <div class="px-4 mt-2"><hr class="border-red-900/30"></div>
 
         <!-- 4. สินค้าชิ้นเดียว แนวนอนขนาดใหญ่ด้านล่าง -->
-        <section class="px-4 mt-4">
+        <section class="px-4 mt-5">
             <img src="https://images.weserv.nl/?url=cdn.discordapp.com/attachments/1528247158069792863/1528380417978138624/149C212E-F29E-4F42-98AB-9F4C1BB39C76.png" 
                  alt="Free Fire Product" 
-                 class="w-full rounded-2xl object-cover shadow-sm border border-gray-100">
+                 class="w-full rounded-2xl object-cover shadow-[0_0_15px_rgba(239,68,68,0.15)] border border-red-900/40">
         </section>
 
-        <!-- 5. รายการสั่งซื้อล่าสุด -->
-        <section class="px-4 mt-6 bg-gray-50 pt-4 pb-12 rounded-t-3xl">
-            <h2 class="text-red-600 font-semibold">รายการสั่งซื้อล่าสุด</h2>
-            <p class="text-xs text-gray-500 mb-3">Latest Order List</p>
+        <!-- 5. รายการสั่งซื้อล่าสุด (ปรับกล่องเป็นสีดำ-เทาเข้ม) -->
+        <section class="px-4 mt-8 pt-5 pb-12 rounded-t-3xl border-t border-red-900/40 bg-gradient-to-b from-[#150a0a] to-[#0a0a0a]">
+            <h2 class="text-red-500 font-semibold tracking-wide">รายการสั่งซื้อล่าสุด</h2>
+            <p class="text-xs text-gray-500 mb-4">Latest Order List</p>
             
             <div class="flex gap-3 overflow-x-auto no-scrollbar pb-4">
-                <div class="min-w-[200px] bg-white p-2 rounded-xl flex gap-3 shadow-sm border border-gray-100 items-center">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg shrink-0 flex items-center justify-center text-red-500"><i class="fa-solid fa-basket-shopping"></i></div>
+                <div class="min-w-[200px] bg-[#151515] p-2 rounded-xl flex gap-3 shadow-sm border border-red-900/30 items-center">
+                    <div class="w-12 h-12 bg-red-950/60 rounded-lg shrink-0 flex items-center justify-center text-red-500 shadow-[inset_0_0_8px_rgba(239,68,68,0.2)]"><i class="fa-solid fa-basket-shopping"></i></div>
                     <div>
-                        <p class="text-xs text-red-600 font-medium">ทดสอบ 2</p>
-                        <p class="text-[10px] text-gray-400">08/05/2569 13:35</p>
+                        <p class="text-xs text-red-400 font-medium">ทดสอบ 2</p>
+                        <p class="text-[10px] text-gray-500">08/05/2569 13:35</p>
                     </div>
                 </div>
-                <div class="min-w-[200px] bg-white p-2 rounded-xl flex gap-3 shadow-sm border border-gray-100 items-center">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg shrink-0 flex items-center justify-center text-red-500"><i class="fa-solid fa-basket-shopping"></i></div>
+                <div class="min-w-[200px] bg-[#151515] p-2 rounded-xl flex gap-3 shadow-sm border border-red-900/30 items-center">
+                    <div class="w-12 h-12 bg-red-950/60 rounded-lg shrink-0 flex items-center justify-center text-red-500 shadow-[inset_0_0_8px_rgba(239,68,68,0.2)]"><i class="fa-solid fa-basket-shopping"></i></div>
                     <div>
-                        <p class="text-xs text-red-600 font-medium">สินค้าทดสอบ 1</p>
-                        <p class="text-[10px] text-gray-400">08/05/2569 13:34</p>
+                        <p class="text-xs text-red-400 font-medium">สินค้าทดสอบ 1</p>
+                        <p class="text-[10px] text-gray-500">08/05/2569 13:34</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. ปุ่มลอย (Music Button - ปรับเป็นสีแดงดุดัน) -->
-        <button class="fixed bottom-24 right-4 bg-red-600 text-white w-12 h-12 rounded-full flex justify-center items-center shadow-lg shadow-red-300 transform transition active:scale-95 z-20">
+        <!-- 6. ปุ่มลอย (Music Button - ขยับลอยได้) -->
+        <button class="music-btn fixed bottom-24 right-4 bg-red-600 text-white w-12 h-12 rounded-full flex justify-center items-center shadow-[0_0_15px_rgba(239,68,68,0.6)] transform transition hover:scale-110 active:scale-95 z-20">
             <i class="fa-solid fa-music"></i>
         </button>
 
