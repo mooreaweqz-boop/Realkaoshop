@@ -1,364 +1,101 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>REALKAO SHOP</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Kanit',sans-serif;
-}
-
-body{
-background:#050505;
-color:white;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow-x:hidden;
-}
-
-
-/* background */
-
-.bg{
-position:fixed;
-width:900px;
-height:900px;
-background:conic-gradient(
-#00eaff,
-#8b5cff,
-#ff0066,
-#00eaff
-);
-filter:blur(200px);
-opacity:.25;
-animation:spin 10s linear infinite;
-}
-
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
-
-
-/* menu */
-
-.menu-btn{
-
-position:fixed;
-top:20px;
-left:20px;
-font-size:35px;
-cursor:pointer;
-z-index:100;
-color:#00eaff;
-
-}
-
-
-
-#sideMenu{
-
-position:fixed;
-left:-260px;
-top:0;
-height:100%;
-width:250px;
-
-background:#111;
-
-padding-top:80px;
-
-transition:.4s;
-
-z-index:99;
-
-box-shadow:0 0 30px #00eaff;
-
-}
-
-
-#sideMenu.active{
-
-left:0;
-
-}
-
-
-#sideMenu div{
-
-padding:20px;
-
-border-bottom:1px solid #333;
-
-cursor:pointer;
-
-}
-
-
-
-#sideMenu div:hover{
-
-color:#00eaff;
-
-}
-
-
-
-
-/* card */
-
-.card{
-
-width:420px;
-
-padding:40px;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(25px);
-
-border-radius:30px;
-
-border:1px solid #333;
-
-box-shadow:0 0 40px #00eaff;
-
-z-index:5;
-
-}
-
-
-
-.logo{
-
-text-align:center;
-
-font-size:40px;
-
-font-weight:bold;
-
-color:#00eaff;
-
-text-shadow:0 0 20px #00eaff;
-
-}
-
-
-
-.sub{
-
-text-align:center;
-
-color:#aaa;
-
-margin-bottom:25px;
-
-}
-
-
-
-input{
-
-width:100%;
-
-padding:15px;
-
-margin:8px 0;
-
-background:#080808;
-
-border:1px solid #333;
-
-border-radius:15px;
-
-color:white;
-
-}
-
-
-
-button{
-
-width:100%;
-
-padding:15px;
-
-margin-top:15px;
-
-border:0;
-
-border-radius:15px;
-
-background:linear-gradient(
-90deg,
-#00eaff,
-#8b5cff
-);
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-}
-
-
-
-.page{
-
-display:none;
-
-}
-
-
-.active{
-
-display:block;
-
-}
-
-
-.switch{
-
-text-align:center;
-
-margin-top:20px;
-
-}
-
-
-.switch span{
-
-color:#00eaff;
-
-cursor:pointer;
-
-}
-
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rexzy Store</title>
+    <!-- เรียกใช้ Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- เรียกใช้ Font Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- เรียกใช้ Font Awesome สำหรับ Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #f7f7fa;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
+<body class="text-gray-800">
 
+    <!-- Container หลัก (จำลองหน้าจอมือถือ) -->
+    <div class="max-w-md mx-auto bg-white min-h-screen relative pb-24 shadow-lg">
 
-<body>
+        <!-- 1. Header (เมนู + ค้นหา) -->
+        <header class="flex justify-between items-center px-4 py-4 bg-white sticky top-0 z-10">
+            <button class="text-gray-500 text-2xl border border-gray-200 rounded-lg px-3 py-1">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="relative w-48">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </span>
+                <input type="text" placeholder="ค้นหาสินค้า..." class="w-full border border-gray-200 rounded-full py-1.5 pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-purple-400">
+            </div>
+        </header>
 
+        <!-- 2. Banner หลัก (อัปเดตเป็นรูปภาพใหม่ล่าสุดตามที่คุณระบุเรียบร้อยแล้ว) -->
+        <section class="px-4 mt-2">
+            <img src="https://cdn.discordapp.com/attachments/1528247158069792863/1528382812758081786/6CE0E11F-02BD-428F-8FE8-807E599FB09A.png?ex=6a5e18ea&is=6a5cc76a&hm=05b72c3a4f8714a09255116501db1a02435bdf306193ab3a7349efa35cf58595&" 
+                 alt="Main Banner" 
+                 class="w-full rounded-2xl object-cover h-auto shadow-sm">
+        </section>
 
-<div class="bg"></div>
+        <!-- 3. หมวดหมู่ (ประกาศ) -->
+        <section class="px-4 mt-4 mb-2 flex gap-2 overflow-x-auto no-scrollbar py-1">
+            <button class="whitespace-nowrap bg-purple-100 text-purple-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+            <button class="whitespace-nowrap bg-purple-100 text-purple-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+            <button class="whitespace-nowrap bg-purple-100 text-purple-600 px-4 py-1.5 rounded-xl text-sm font-medium">ประกาศ</button>
+        </section>
+        
+        <div class="px-4"><hr class="border-gray-100"></div>
 
+        <!-- 4. สินค้าชิ้นเดียว แนวนอนขนาดใหญ่ -->
+        <section class="px-4 mt-4">
+            <img src="https://cdn.discordapp.com/attachments/1528247158069792863/1528380417978138624/149C212E-F29E-4F42-98AB-9F4C1BB39C76.png?ex=6a5e16af&is=6a5cc52f&hm=36b3f1b5c576404368440ddc60bb694ae71cc52813d7fa8d1331b106e30e46fd&" 
+                 alt="Large Product Banner" 
+                 class="w-full rounded-2xl object-cover h-auto shadow-sm border border-gray-100">
+        </section>
 
-<div class="menu-btn" onclick="toggleMenu()">
-☰
-</div>
+        <!-- 5. รายการสั่งซื้อล่าสุด -->
+        <section class="px-4 mt-6 bg-gray-50 pt-4 pb-12 rounded-t-3xl">
+            <h2 class="text-purple-600 font-semibold">รายการสั่งซื้อล่าสุด</h2>
+            <p class="text-xs text-gray-500 mb-3">Latest Order List</p>
+            
+            <div class="flex gap-3 overflow-x-auto no-scrollbar pb-4">
+                <div class="min-w-[200px] bg-white p-2 rounded-xl flex gap-3 shadow-sm border border-gray-100 items-center">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg shrink-0"></div>
+                    <div>
+                        <p class="text-xs text-purple-600 font-medium">ทดสอบ 2</p>
+                        <p class="text-[10px] text-gray-400">08/05/2569 13:35</p>
+                    </div>
+                </div>
+                <div class="min-w-[200px] bg-white p-2 rounded-xl flex gap-3 shadow-sm border border-gray-100 items-center">
+                    <img src="https://images.unsplash.com/photo-1627398225058-f4b62db47bd8?auto=format&fit=crop&q=80&w=100&h=100" class="w-12 h-12 object-cover rounded-lg shrink-0">
+                    <div>
+                        <p class="text-xs text-purple-600 font-medium">สินค้าทดสอบ 1</p>
+                        <p class="text-[10px] text-gray-400">08/05/2569 13:34</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- 6. ปุ่มลอย (Music Button) -->
+        <button class="fixed bottom-24 right-4 bg-purple-600 text-white w-12 h-12 rounded-full flex justify-center items-center shadow-lg shadow-purple-300 transform transition active:scale-95 z-20">
+            <i class="fa-solid fa-music"></i>
+        </button>
 
-<div id="sideMenu">
+    </div>
 
-<div onclick="openShop()">
-🛒 สินค้าทั้งหมด
-</div>
-
-<div onclick="openTopup()">
-💰 เติมเงิน
-</div>
-
-<div onclick="openHistory()">
-📜 ประวัติการซื้อ
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-
-<!-- LOGIN -->
-
-<div id="loginPage" class="page active">
-
-
-<div class="logo">
-REALKAO
-</div>
-
-
-<div class="sub">
-SHOP SYSTEM
-</div>
-
-
-<input id="loginUser" placeholder="👤 Username">
-
-
-<input id="loginPass" type="password" placeholder="🔒 Password">
-
-
-<button onclick="login()">
-เข้าสู่ระบบ
-</button>
-
-
-<div class="switch">
-ยังไม่มีบัญชี?
-<span onclick="openRegister()">
-สมัครสมาชิก
-</span>
-</div>
-
-
-</div>
-
-
-
-
-<!-- REGISTER -->
-
-
-<div id="registerPage" class="page">
-
-
-<div class="logo">
-REGISTER
-</div>
-
-
-<input id="regUser" placeholder="👤 Username">
-
-
-<input id="regPass" type="password" placeholder="🔒 Password">
-
-
-<input id="regConfirm" type="password" placeholder="🔐 ยืนยัน Password">
-
-
-<button onclick="register()">
-สมัครสมาชิก
-</button>
-
-
-<div class="switch">
-มีบัญชีแล้ว?
-<span onclick="openLogin()">
-เข้าสู่ระบบ
-</span>
-</div>
-
-
-</div>
+</body>
+</html>
